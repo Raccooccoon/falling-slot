@@ -1,0 +1,25 @@
+{
+  "name": "falling-slot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raccooccoon/falling-slot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Raccooccoon/falling-slot/issues"
+  },
+  "homepage": "https://github.com/Raccooccoon/falling-slot#readme",
+  "dependencies": {
+    "@types/pixi.js": "^5.0.0",
+    "pixi.js": "^5.3.3",
+    "requirejs": "^2.3.6",
+    "typescript": "^4.0.3"
+  }
+}

@@ -1,0 +1,42 @@
+html {
+  background-color: #EFEFEF;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#canvas {
+  justify-self: center;
+  background-image: url("./assets/landscape.jpg");
+  background-size: cover;
+}
+
+.container {
+  display: grid;
+}
+
+.btn_spin {
+  justify-self: center;
+  width: 150px;
+  height: 146px;
+  background-image: url("./assets/ui/btn_spin_normal.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn_spin:disabled {
+  background-image: url("./assets/ui/btn_spin_disabled.png");
+}
+
+.btn_spin:hover:enabled {
+  background-image: url("./assets/ui/btn_spin_hover.png");
+}
+
+.btn_spin:active {
+  background-image: url("./assets/ui/btn_spin_pressed.png");
+}
