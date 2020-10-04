@@ -1,3 +1,8 @@
 /.vscode
 /js
 /node_modules
+/public
+/.firebase
+/.firebaserc
+/firebase-debug.log
+/firebase.json

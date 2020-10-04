@@ -9,7 +9,7 @@ body {
 
 #canvas {
   justify-self: center;
-  background-image: url("./assets/landscape.jpg");
+  background-image: url("./assets/images/landscape.jpg");
   background-size: cover;
 }
 
@@ -21,7 +21,7 @@ body {
   justify-self: center;
   width: 150px;
   height: 146px;
-  background-image: url("./assets/ui/btn_spin_normal.png");
+  background-image: url("./assets/images/ui/btn_spin_normal.png");
   background-size: contain;
   background-repeat: no-repeat;
   border: none;
@@ -29,14 +29,23 @@ body {
   cursor: pointer;
 }
 
+.btn_spin::after {
+  position: relative;
+  color: #213708;
+  font-family: 'Roboto', sans-serif;
+  font-size: 30px;
+  content: 'Spin';
+  top: -25px;
+}
+
 .btn_spin:disabled {
-  background-image: url("./assets/ui/btn_spin_disabled.png");
+  background-image: url("./assets/images/ui/btn_spin_disabled.png");
 }
 
 .btn_spin:hover:enabled {
-  background-image: url("./assets/ui/btn_spin_hover.png");
+  background-image: url("./assets/images/ui/btn_spin_hover.png");
 }
 
 .btn_spin:active {
-  background-image: url("./assets/ui/btn_spin_pressed.png");
+  background-image: url("./assets/images/ui/btn_spin_pressed.png");
 }

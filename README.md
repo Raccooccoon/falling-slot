@@ -1,1 +1,3 @@
-# falling-slot
+# falling-slots
+
+https://falling-slots.web.app

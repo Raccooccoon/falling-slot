@@ -1,4 +1,5 @@
 import { renderer } from './renderer';
+import { slotSound, buttonSound } from './sounds';
 
 export class Slot {
   name: string;
@@ -20,12 +21,14 @@ export class Slot {
   }
 
   static stage: PIXI.Container = new PIXI.Container();
-  static slots: Array<Slot | null> = [];
+  static slots: (Slot | null)[] = [];
   static columns: number = 5;
   static raws: number = 3;
   static disabled: boolean = false;
   
   public static getSlots(): void {
+    buttonSound.play();
+    buttonSound.duration(1000);
     this.disabled = true;
     const delay = Slot.slots.length;
     if (Slot.slots.length) {
@@ -33,7 +36,7 @@ export class Slot {
     }
     for (let i = 0; i < Slot.columns * Slot.raws; i++) {
       setTimeout(() => {
-        const slot = new Slot(`../assets/symbols/symbol_${Math.floor(Math.random() * 8) + 1}.png`, i);
+        const slot = new Slot(`../assets/images/symbols/symbol_${Math.floor(Math.random() * 8) + 1}.png`, i);
         Slot.slots[i] = slot;
         slot.getSlot();
         if (i === Slot.columns * Slot.raws - 1) {
@@ -62,18 +65,20 @@ export class Slot {
       if (this.index < Slot.columns && this.image.y >= this.rowPosition(1)) {
         this.image.y = this.rowPosition(1);
         this.ticker.remove(animate);
+        this.slotStopSound();
       }
       else if (this.index >= Slot.columns && this.index < Slot.columns * 2 && this.image.y >= this.rowPosition(2)) {
         this.image.y = this.rowPosition(2);
         this.ticker.remove(animate);
+        this.slotStopSound();
       }
       else if (this.index >= Slot.columns * 2 && this.index < Slot.columns * 3 && this.image.y >= this.rowPosition(3)) {
         this.image.y = this.rowPosition(3);
         this.ticker.remove(animate);
+        this.slotStopSound();
       }
       renderer.render(Slot.stage);
     }
-
     this.ticker.add(animate);
     this.ticker.start();
   }
@@ -93,5 +98,11 @@ export class Slot {
 
   private rowPosition(row: number): number {
     return renderer.height - this.slotHeight * row;
+  }
+
+  private slotStopSound(): void {
+    const sound = slotSound(Math.floor(Math.random() * 5) + 1);
+    sound.play();
+    sound.duration(1000);
   }
 }
