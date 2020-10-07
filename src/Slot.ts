@@ -1,4 +1,4 @@
-import { renderer } from './renderer';
+import { renderer, stage } from './view';
 import { slotSound, buttonSound } from './sounds';
 
 export class Slot {
@@ -20,7 +20,6 @@ export class Slot {
     this.ticker = new PIXI.Ticker();
   }
 
-  static stage: PIXI.Container = new PIXI.Container();
   static slots: (Slot | null)[] = [];
   static columns: number = 5;
   static raws: number = 3;
@@ -58,26 +57,20 @@ export class Slot {
   private getSlot(): void {
     this.image.x = this.slotWidth * (this.index % Slot.columns);
     this.image.y = -this.slotHeight;
-    Slot.stage.addChild(this.image);
+    stage.addChild(this.image);
 
     const animate = () => {
       this.image.y += 80;
       if (this.index < Slot.columns && this.image.y >= this.rowPosition(1)) {
-        this.image.y = this.rowPosition(1);
-        this.ticker.remove(animate);
-        this.slotStopSound();
+        this.slotStop(animate, 1);
       }
       else if (this.index >= Slot.columns && this.index < Slot.columns * 2 && this.image.y >= this.rowPosition(2)) {
-        this.image.y = this.rowPosition(2);
-        this.ticker.remove(animate);
-        this.slotStopSound();
+        this.slotStop(animate, 2);
       }
       else if (this.index >= Slot.columns * 2 && this.index < Slot.columns * 3 && this.image.y >= this.rowPosition(3)) {
-        this.image.y = this.rowPosition(3);
-        this.ticker.remove(animate);
-        this.slotStopSound();
+        this.slotStop(animate, 3);
       }
-      renderer.render(Slot.stage);
+      renderer.render(stage);
     }
     this.ticker.add(animate);
     this.ticker.start();
@@ -88,9 +81,9 @@ export class Slot {
       this.image.y += 80;
       if (this.image.y > renderer.height) {
         this.ticker.remove(animate);
-        Slot.stage.removeChild(this.image);
+        stage.removeChild(this.image);
       }
-      renderer.render(Slot.stage);
+      renderer.render(stage);
     }
     this.ticker.add(animate);
     this.ticker.start();
@@ -105,4 +98,10 @@ export class Slot {
     sound.play();
     sound.duration(1000);
   }
+
+  private slotStop(animateFunc: () => void, row: number): void {
+    this.image.y = this.rowPosition(row);
+    this.ticker.remove(animateFunc);
+    this.slotStopSound();
+  };
 }

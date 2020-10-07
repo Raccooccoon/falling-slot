@@ -6,3 +6,5 @@ export const renderer = new PIXI.Renderer({
   width: 1180,
   height: 750 
 });
+
+export const stage: PIXI.Container = new PIXI.Container();
